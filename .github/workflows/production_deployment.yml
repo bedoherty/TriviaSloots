@@ -1,0 +1,36 @@
+name: Production Deployment Actions
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+
+      - uses: webfactory/ssh-agent@v0.2.0
+        with:
+          ssh-private-key: ${{ secrets.DO_Key }}
+
+      - name: Use Node.js 12.3.1
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.3.1
+
+      - run: npm install
+
+      - run: npm run build
+
+      - run: tee private_key <<< "${{ secrets.DO_Key }}"
+
+      - run: chmod 400 private_key
+
+      - name: Deploy to Digital Ocean Servers
+        run: rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i private_key" --progress build/* brian@triviasloots.com:/var/www/web
