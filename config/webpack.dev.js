@@ -53,6 +53,8 @@ module.exports = {
     devServer: {
         contentBase: resolvePath("build"),
         hot: true,
+        open: true,
+        port: 3000
     },
     plugins: [
         new HtmlWebpackPlugin({
