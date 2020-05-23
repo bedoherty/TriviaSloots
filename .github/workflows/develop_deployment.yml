@@ -31,4 +31,4 @@ jobs:
       - run: chmod 400 private_key
 
       - name: Deploy to Digital Ocean Servers
-        run: rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i private_key" --progress build/* brian@triviasloots.com:/var/www/web_dev
+        run: rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i private_key" --progress build/* brian@triviasloots.com:~/apache2/web_dev

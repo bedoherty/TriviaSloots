@@ -19,3 +19,24 @@ body {
 .menu-right {
     float: right;
 }
+
+.main-menu {
+    display: flex;
+    flex-direction: row !important;
+
+    .left-section {
+        flex: 1;
+        height: 60px;
+        display: flex;
+        align-items: center;
+    }
+
+    .right-section {
+        flex: 1;
+
+        .MuiAvatar-root {
+            float: right;
+            margin: 10px;
+        }
+    }
+}

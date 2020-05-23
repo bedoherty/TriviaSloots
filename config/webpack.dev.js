@@ -54,7 +54,8 @@ module.exports = {
         contentBase: resolvePath("build"),
         hot: true,
         open: true,
-        port: 3000
+        port: 3000,
+        historyApiFallback: true
     },
     plugins: [
         new HtmlWebpackPlugin({
