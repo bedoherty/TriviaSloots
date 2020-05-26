@@ -7,14 +7,22 @@ import { IUser } from "src/Data/Interfaces/User";
 import { getActiveUser } from "src/Data/Selectors/User";
 import { connect } from "react-redux";
 import Avatar from "@material-ui/core/Avatar";
+import { logoutUser } from "src/Data/Actions/User";
 
 interface IMenuBarProps {
     user: IUser;
+    logout: () => void;
 }
 
 const mapStateToProps = (state) => {
     return {
         user: getActiveUser(state)
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        logout: () => dispatch(logoutUser())
     }
 }
 
@@ -44,15 +52,25 @@ class MenuBar extends React.Component<IMenuBarProps> {
         }
 
         return (
-            <Avatar alt={ user.nickname } src={ user.picture } />
+            <Avatar onClick={ this.handleLogoutClick } alt={ user.nickname } src={ user.picture } />
         )
+    }
+
+    handleLogoutClick = () => {
+        /* auth0Client.then((client: Auth0Client) => {
+            client.logout();
+        }); */
+        const { logout } = this.props;
+        logout();
     }
 
     handleLoginClick = () => {
         auth0Client.then((client: Auth0Client) => {
-            client.loginWithRedirect();
+            client.loginWithRedirect({
+                audience: "https://triviasloots.com"
+            });
         })
     }
 }
 
-export default connect(mapStateToProps)(MenuBar);
+export default connect(mapStateToProps, mapDispatchToProps)(MenuBar);
