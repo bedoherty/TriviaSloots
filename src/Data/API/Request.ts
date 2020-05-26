@@ -6,7 +6,7 @@ const urlBase = (() => {
         case "http://localhost:3000":
             return "http://localhost:3069/";
         default:
-            return "https://api.triviasloots.com";
+            return "https://api.triviasloots.com/";
     }
 })();
 
