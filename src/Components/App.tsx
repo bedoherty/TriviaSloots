@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import AuthPage from "src/Components/AuthPage";
 import ConstructionPage from "src/Components/ConstructionPage";
 import MenuBar from "src/Components/MenuBar";
+import QuestionsPage from "./Questions/QuestionsPage";
 
 // Import our stylesheets
 import "Styles/Global.less";
@@ -19,8 +20,8 @@ export default class App extends React.Component {
                 <MenuBar />
                 <Container maxWidth="lg">
                     <Router>
-                        <Route path="/" component={ ConstructionPage } />
                         <Route path="/auth" component={ AuthPage } />
+                        <Route path="/questions" component={ QuestionsPage } />
                     </Router>
                 </Container>
             </React.Fragment>

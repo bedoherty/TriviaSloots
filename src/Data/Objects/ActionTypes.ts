@@ -1,4 +1,10 @@
 export const ACTION_TYPES = {
+    Questions: {
+        ADD_QUESTIONS: "ADD_QUESTIONS",
+        FETCH_QUESTIONS_PAGE: "FETCH_QUESTIONS_PAGE",
+        RESET_QUESTIONS: "RESET_QUESTIONS",
+        SET_TOTAL_PAGES: "SET_TOTAL_PAGES"
+    },
     User:  {
         LOGIN_USER: "LOGIN_USER",
         LOGOUT_USER: "LOGOUT_USER"

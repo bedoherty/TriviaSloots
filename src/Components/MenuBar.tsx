@@ -67,7 +67,8 @@ class MenuBar extends React.Component<IMenuBarProps> {
     handleLoginClick = () => {
         auth0Client.then((client: Auth0Client) => {
             client.loginWithRedirect({
-                audience: "https://triviasloots.com"
+                audience: "https://triviasloots.com",
+                
             });
         })
     }
