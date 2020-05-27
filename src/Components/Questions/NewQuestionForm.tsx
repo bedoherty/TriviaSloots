@@ -73,6 +73,7 @@ export default class NewQuestionForm extends React.Component<INewQuestionFormPro
         return (
             <div className="answer-row">
                 <TextField 
+                    key={ `${ answer }-${ index }` }
                     value={ answer }
                     autoFocus
                     margin="dense"

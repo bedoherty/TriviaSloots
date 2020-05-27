@@ -26,6 +26,10 @@ const mapStateToProps = (state) => {
 }
 
 class QuestionsList extends React.Component<IQuestionsListProps> {
+    componentDidMount() {
+        this.props.fetchNextPage();
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -62,6 +66,7 @@ class QuestionsList extends React.Component<IQuestionsListProps> {
         const { answers, prompt, _id } = question;
         return (
             <EditQuestionWrapper
+                key={ JSON.stringify(question) }
                 question={ question }>
                 <TableRow key={ _id }>
                     <TableCell>{ prompt }</TableCell>

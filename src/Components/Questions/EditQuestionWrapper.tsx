@@ -33,7 +33,6 @@ class EditQuestionWrapper extends React.Component<IEditQuestionWrapperButtonProp
         const { modalVisible } = this.state;
         const { question } = this.props;
 
-        console.log(this.props.children);
         return (
             <React.Fragment>
                 { React.cloneElement(this.props.children as any, { onClick: this.toggleModalVisibility }) }

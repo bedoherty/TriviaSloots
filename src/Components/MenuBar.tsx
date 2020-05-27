@@ -45,7 +45,7 @@ class MenuBar extends React.Component<IMenuBarProps> {
                 </div>
                 <div className="right-section">
                     { this.renderUserAvatar() }
-                    { this.renderMenu() }
+                    { /* this.renderMenu() */ }
                 </div>
             </AppBar>
         )
@@ -66,23 +66,35 @@ class MenuBar extends React.Component<IMenuBarProps> {
     }
 
     renderMenu = () => {
+        const { user } = this.props;
+
+        if (!user) {
+            return (
+                <Menu
+                    id="user-menu"
+                    anchorEl={ this.avatarRef.current }
+                    keepMounted
+                    open={ Boolean(this.avatarRef.current) }>
+                        <MenuItem onClick={ this.handleLoginClick }>Login</MenuItem>
+                </Menu>
+            );
+        }
+
         return (
             <Menu
                 id="user-menu"
                 anchorEl={ this.avatarRef.current }
                 keepMounted
                 open={ Boolean(this.avatarRef.current) }>
-                    <MenuItem>Testing Menus</MenuItem>
+                    <MenuItem onClick={ this.handleLogoutClick }>Logout</MenuItem>
             </Menu>
-        )
+        );
     }
 
     handleLogoutClick = () => {
-        /* auth0Client.then((client: Auth0Client) => {
-            client.logout();
-        }); */
         const { logout } = this.props;
         logout();
+        document.location.href = "/";
     }
 
     handleLoginClick = () => {

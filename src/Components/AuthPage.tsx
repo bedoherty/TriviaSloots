@@ -30,7 +30,7 @@ class AuthPage extends React.Component<IAuthPageProps> {
                 client.getTokenSilently().then((token: string) => {
                     client.getUser().then((user: IUser) => {
                         loginUser(user, token);
-                        document.location.href="/";
+                        document.location.href = "/questions";
                     })
                 });
             });
