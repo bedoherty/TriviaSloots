@@ -5,6 +5,8 @@ import { getAllQuestions } from "src/Data/Selectors/Questions";
 import { IQuestion } from "src/Data/Interfaces/Questions";
 import { Waypoint } from 'react-waypoint';
 import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody } from "@material-ui/core";
+import Questions from "src/Data/Reducers/Questions";
+import EditQuestionWrapper from "./EditQuestionWrapper";
 
 interface IQuestionsListProps {
     fetchNextPage: () => void;
@@ -40,7 +42,8 @@ class QuestionsList extends React.Component<IQuestionsListProps> {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <Waypoint 
+                <Waypoint
+                    key={ Questions.length } 
                     onEnter={ this.props.fetchNextPage } />
             </React.Fragment>
         );
@@ -58,10 +61,13 @@ class QuestionsList extends React.Component<IQuestionsListProps> {
     renderTableRow = (question: IQuestion) => {
         const { answers, prompt, _id } = question;
         return (
-            <TableRow key={ _id }>
-                <TableCell>{ prompt }</TableCell>
-                <TableCell>{ answers.join(", ") }</TableCell>
-            </TableRow>
+            <EditQuestionWrapper
+                question={ question }>
+                <TableRow key={ _id }>
+                    <TableCell>{ prompt }</TableCell>
+                    <TableCell>{ answers.join(", ") }</TableCell>
+                </TableRow>
+            </EditQuestionWrapper>
         )
     }
 }

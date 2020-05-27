@@ -3,6 +3,7 @@ export class IPaginatedDataSet<T> {
     lastPage: number;
     pagesFetched: boolean[];
     options: {
-        perPage: number
+        perPage: number,
+        search: string
     }
 }

@@ -8,6 +8,7 @@ import { getActiveUser } from "src/Data/Selectors/User";
 import { connect } from "react-redux";
 import Avatar from "@material-ui/core/Avatar";
 import { logoutUser } from "src/Data/Actions/User";
+import { Menu, MenuItem } from "@material-ui/core";
 
 interface IMenuBarProps {
     user: IUser;
@@ -27,6 +28,13 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 class MenuBar extends React.Component<IMenuBarProps> {
+    avatarRef: React.RefObject<any>;
+
+    constructor(props: IMenuBarProps) {
+        super(props);
+        this.avatarRef = React.createRef();
+    }
+
     render() {
         return (
             <AppBar className="main-menu" position="static">
@@ -37,6 +45,7 @@ class MenuBar extends React.Component<IMenuBarProps> {
                 </div>
                 <div className="right-section">
                     { this.renderUserAvatar() }
+                    { this.renderMenu() }
                 </div>
             </AppBar>
         )
@@ -47,12 +56,24 @@ class MenuBar extends React.Component<IMenuBarProps> {
 
         if (!user) {
             return (
-                <div className="login-button" onClick={ this.handleLoginClick }>Login</div>
+                <Avatar onClick={ this.handleLoginClick } ref={ this.avatarRef } />
             );
         }
 
         return (
-            <Avatar onClick={ this.handleLogoutClick } alt={ user.nickname } src={ user.picture } />
+            <Avatar onClick={ this.handleLogoutClick } ref={ this.avatarRef } alt={ user.nickname } src={ user.picture } />
+        )
+    }
+
+    renderMenu = () => {
+        return (
+            <Menu
+                id="user-menu"
+                anchorEl={ this.avatarRef.current }
+                keepMounted
+                open={ Boolean(this.avatarRef.current) }>
+                    <MenuItem>Testing Menus</MenuItem>
+            </Menu>
         )
     }
 

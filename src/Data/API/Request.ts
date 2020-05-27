@@ -47,3 +47,47 @@ export const GET = (location: string, query?: UrlQuery) => {
         .catch(reject);
     });
 }
+
+export const PUT = (location: string, body?: Object) => {
+    let url = urlBase;
+
+    if (location && location.length) {
+        url += location;
+    }
+
+    return new Promise((resolve, reject) => {
+        fetch(url, {
+            method: "put",
+            headers: {
+                Authorization: "Bearer " + getActiveToken(store.getState()),
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)   
+        })
+        .then(res => res.json())
+        .then(resolve)
+        .catch(reject);
+    });
+}
+
+export const POST = (location: string, body?: Object) => {
+    let url = urlBase;
+
+    if (location && location.length) {
+        url += location;
+    }
+
+    return new Promise((resolve, reject) => {
+        fetch(url, {
+            method: "post",
+            headers: {
+                Authorization: "Bearer " + getActiveToken(store.getState()),
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)   
+        })
+        .then(res => res.json())
+        .then(resolve)
+        .catch(reject);
+    });
+}
